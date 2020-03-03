@@ -1,8 +1,23 @@
 import React from "react";
 import { AppLoading } from "expo";
-import { Container, Header, Content, Form, Item, Input } from "native-base";
+import {
+  Container,
+  Header,
+  Content,
+  Form,
+  Item,
+  Input,
+  Button,
+  Text,
+  View,
+  Left,
+  Body,
+  Right,
+  Title
+} from "native-base";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,9 +43,15 @@ export default class App extends React.Component {
 
     return (
       <Container>
-        <Header />
+        <Header>
+          <Left />
+          <Body>
+            <Title>Hodler</Title>
+          </Body>
+          <Right />
+        </Header>
         <Content>
-          <Form>
+          <Form style={styles.container}>
             <Item>
               <Input placeholder="Username" />
             </Item>
@@ -38,8 +59,33 @@ export default class App extends React.Component {
               <Input placeholder="Password" />
             </Item>
           </Form>
+          <View style={styles.buttons}>
+            <Button style={styles.button} block>
+              <Text>Login</Text>
+            </Button>
+            <Button style={styles.signup} block>
+              <Text>Signup</Text>
+            </Button>
+          </View>
         </Content>
       </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 400
+  },
+  button: {
+    marginTop: 50
+  },
+  signup: {
+    marginTop: 10
+  },
+  buttons: {
+    flexDirection: "column",
+    alignSelf: "center",
+    width: "70%"
+  }
+});
