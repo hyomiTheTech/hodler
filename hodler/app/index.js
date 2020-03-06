@@ -2,9 +2,16 @@ import React from "react";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, View } from "react-native";
+
+// React Navigation
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Login from "./components/Login";
+import Signup from "./components/Signup";
+
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,6 +35,13 @@ export default class App extends React.Component {
       return <AppLoading />;
     }
 
-    return <Login />;
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
 }

@@ -15,9 +15,9 @@ import {
   Title
 } from "native-base";
 
-import styles from "./styles";
+import styles from "../Login/styles";
 
-const Login = ({ navigation }) => {
+const Signup = () => {
   return (
     <Container>
       <Content>
@@ -28,16 +28,12 @@ const Login = ({ navigation }) => {
           <Item last>
             <Input placeholder="Password" />
           </Item>
+          <Item last>
+            <Input placeholder="Password Confirm" />
+          </Item>
         </Form>
         <View style={styles.buttons}>
-          <Button style={styles.button} block>
-            <Text>Login</Text>
-          </Button>
-          <Button
-            onPress={() => navigation.navigate("Signup")}
-            style={styles.signup}
-            block
-          >
+          <Button style={styles.signup} block>
             <Text>Signup</Text>
           </Button>
         </View>
@@ -46,4 +42,4 @@ const Login = ({ navigation }) => {
   );
 };
 
-export default Login;
+export default Signup;
