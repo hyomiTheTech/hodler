@@ -1,39 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
-  Header,
   Content,
   Form,
   Item,
   Input,
   Button,
   Text,
-  View,
-  Left,
-  Body,
-  Right,
-  Title
+  View
 } from "native-base";
 
-import styles from "../Login/styles";
+import { Alert } from "react-native";
 
-const Signup = () => {
+import styles from "../Signup/styles";
+
+import Firebase from "../../firebaseConfig";
+import { TextInput } from "react-native-gesture-handler";
+
+const Signup = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = () => {
+    Firebase.auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        Alert.alert("Welcome to Hodler!!");
+      })
+      .then(() => navigation.navigate("Login"))
+      .catch(err => console.log(err));
+  };
   return (
     <Container>
       <Content>
         <Form style={styles.container}>
           <Item>
-            <Input placeholder="Username" />
+            <Input placeholder="E-Mail" onChangeText={setEmail} />
           </Item>
-          <Item last>
-            <Input placeholder="Password" />
+          <Item>
+            <Input placeholder="Password" onChangeText={setPassword} />
           </Item>
-          <Item last>
+          {/* <Item>
             <Input placeholder="Password Confirm" />
-          </Item>
+          </Item> */}
         </Form>
+
         <View style={styles.buttons}>
-          <Button style={styles.signup} block>
+          <Button onPress={handleSignUp} style={styles.button} block>
             <Text>Signup</Text>
           </Button>
         </View>

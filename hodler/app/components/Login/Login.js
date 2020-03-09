@@ -1,36 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
-  Header,
   Content,
   Form,
   Item,
   Input,
   Button,
   Text,
-  View,
-  Left,
-  Body,
-  Right,
-  Title
+  View
 } from "native-base";
+
+import { Alert } from "react-native";
 
 import styles from "./styles";
 
+import Firebase from "../../firebaseConfig";
+
 const Login = ({ navigation }) => {
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    Firebase.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        Alert.alert(`Hi ${email}`);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   return (
     <Container>
       <Content>
         <Form style={styles.container}>
           <Item>
-            <Input placeholder="Username" />
+            <Input onChangeText={setEmail} placeholder="E-Mail" />
           </Item>
           <Item last>
-            <Input placeholder="Password" />
+            <Input onChangeText={setPassword} placeholder="Password" />
           </Item>
         </Form>
         <View style={styles.buttons}>
-          <Button style={styles.button} block>
+          <Button onPress={handleLogin} style={styles.button} block>
             <Text>Login</Text>
           </Button>
           <Button
